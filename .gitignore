@@ -8,3 +8,6 @@ images/thumbnails/*
 
 var/snapshots/*
 var/files/*
+
+app/lib/*
+app/payments/*

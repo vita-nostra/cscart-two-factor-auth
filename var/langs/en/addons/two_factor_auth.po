@@ -1,0 +1,13 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US"
+
+msgctxt "Addons::name::two_factor_auth"
+msgid "Two-factor authorization"
+msgstr "Two-factor authorization"
+
+msgctxt "Addons::description::two_factor_auth"
+msgid "Enables two-factor authorization"
+msgstr "Enables two-factor authorization"

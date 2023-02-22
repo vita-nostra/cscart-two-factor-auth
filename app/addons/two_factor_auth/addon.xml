@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<addon scheme="4.0">
+    <id>two_factor_auth</id>
+    <version>1.0</version>
+    <priority>100000</priority>
+    <position>0</position>
+    <status>active</status>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>ru</default_language>
+
+    <autoload>
+        <psr4 prefix="Tygh\Addons\TwoFactorAuth\">src</psr4>
+    </autoload>
+    <bootstrap>\Tygh\Addons\TwoFactorAuth\Bootstrap</bootstrap>
+    <installer>\Tygh\Addons\TwoFactorAuth\Installer</installer>
+</addon>
