@@ -4,13 +4,14 @@ namespace Tygh\Addons\TwoFactorAuth;
 
 use Tygh\Core\ApplicationInterface;
 use Tygh\Core\BootstrapInterface;
+use Tygh\Core\HookHandlerProviderInterface;
 
 /**
  * This class describes instructions for loading the TwoFactorAuth add-on
  *
  * @package Tygh\Addons\TwoFactorAuth
  */
-class Bootstrap implements BootstrapInterface
+class Bootstrap implements BootstrapInterface, HookHandlerProviderInterface
 {
     /**
      * @inheritDoc

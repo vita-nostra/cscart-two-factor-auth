@@ -4,6 +4,7 @@ namespace Tygh\Addons\TwoFactorAuth;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Tygh\Addons\TwoFactorAuth\HookHandlers\AuthHookHandler;
 use Tygh\Tygh;
 
 /**
@@ -21,6 +22,10 @@ class ServiceProvider implements ServiceProviderInterface
     {
         $app['addons.two_factor_auth.authorization_code'] = function (Container $app) {
             return new AuthorizationCode($app, AREA, DESCR_SL);
+        };
+
+        $app['addons.two_factor_auth.hook_handlers.auth'] = function (Container $app) {
+            return new AuthHookHandler($app);
         };
     }
 
