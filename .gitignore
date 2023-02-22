@@ -1,0 +1,10 @@
+var/cache/*
+local_conf.php
+
+.idea
+
+*.log
+images/thumbnails/*
+
+var/snapshots/*
+var/files/*
