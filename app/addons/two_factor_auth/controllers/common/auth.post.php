@@ -11,7 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!isset(Tygh::$app['session']['tf_auth'])) {
             return [CONTROLLER_STATUS_REDIRECT, 'auth.login_form', true];
         }
-        $authorization_code->checkCode($_POST['confirm_code']);
+        if($authorization_code->checkCode($_POST['confirm_code'])) {
+            return [CONTROLLER_STATUS_REDIRECT, '', true];
+        }
     }
 }
 
@@ -23,10 +25,11 @@ if ($mode == 'confirm_code') {
 
 if ($mode == 'repeat_confirm_code') {
     if (isset(Tygh::$app['session']['tf_auth'])) {
-        $authorization_code->repeatCode();
-    }
-
-    if (!defined('AJAX_REQUEST')) {
-        return [CONTROLLER_STATUS_REDIRECT, 'auth.confirm_code', true];
+        if($authorization_code->repeatCode()) {
+            return [CONTROLLER_STATUS_REDIRECT, 'auth.confirm_code', true];
+        }
+    } else {
+        fn_set_notification('E', __('error'), __('Введите логин и пароль еще раз'));
+        return [CONTROLLER_STATUS_REDIRECT, 'auth.login_form', true];
     }
 }

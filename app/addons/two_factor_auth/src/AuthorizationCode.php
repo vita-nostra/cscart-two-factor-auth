@@ -3,6 +3,7 @@
 namespace Tygh\Addons\TwoFactorAuth;
 
 use Tygh\Application;
+use Tygh\Enum\NotificationSeverity;
 use Tygh\Enum\YesNo;
 use Tygh\Tygh;
 
@@ -20,9 +21,23 @@ class AuthorizationCode
 
     public function generateCode($user_id) {
         $code = fn_generate_code();
-        $this->app['session']['tf_auth']['code'] = $code;
-        $this->app['session']['tf_auth']['code_expires_at'] = time() + 5 * 60;
-        fn_print_r($code);
+        Tygh::$app['session']['tf_auth']['code'] = $code;
+        Tygh::$app['session']['tf_auth']['code_expires_at'] = time() + 5 * 60;
+
+        $user_data = fn_get_user_info($user_id);
+
+        Tygh::$app['event.dispatcher']->dispatch('profile.send_code',
+            [
+                'user_data' => $user_data,
+                'code' => $code
+            ]
+        );
+
+        if (!defined('AJAX_REQUEST')) {
+            fn_set_notification(NotificationSeverity::NOTICE, __('information'), __('Проверочный код отправлен на ', [
+                '[email]' => $user_data['email']
+            ]));
+        }
     }
 
     public function checkCode($code)
@@ -38,7 +53,7 @@ class AuthorizationCode
                     $ajax->assign('force_redirection', $_REQUEST['return_url'] ?? 'index.php');
                 }
 
-                return [CONTROLLER_STATUS_REDIRECT, '', true];
+                return true;
             } else {
                 if (defined('AJAX_REQUEST')) {
                     $this->displayAjaxCodeInfo(__('Срок действия кода истек'));
@@ -53,12 +68,14 @@ class AuthorizationCode
                 fn_set_notification('E', __('error'), __('Неверно введен проверочный код'));
             }
         }
+
+        return false;
     }
 
     public function repeatCode()
     {
-        if (Tygh::$app['session']['tf_auth']['number_code_requests'] >= 1) {
-            fn_set_notification('E', __('error'), __('Лимит попыток исчерпан. Пожалуйста, введите логин и пароль еще раз'));
+        if (Tygh::$app['session']['tf_auth']['number_code_requests'] >= 3) {
+            fn_set_notification('W', __('warning'), __('Лимит попыток исчерпан. Пожалуйста, введите логин и пароль еще раз'), 'I');
             unset(Tygh::$app['session']['tf_auth']);
 
             if (defined('AJAX_REQUEST')) {
@@ -66,15 +83,17 @@ class AuthorizationCode
                 $ajax->assign('force_redirection', fn_url('auth.login_form'));
             }
 
-            return [CONTROLLER_STATUS_REDIRECT, 'auth.login_form', true];
+            return true;
         } else {
             $this->generateCode(Tygh::$app['session']['tf_auth']['user_id']);
             Tygh::$app['session']['tf_auth']['number_code_requests']++;
 
             if (!defined('AJAX_REQUEST')) {
-                return [CONTROLLER_STATUS_REDIRECT, 'auth.confirm_code', true];
+                return true;
             }
         }
+
+        return false;
     }
 
     protected function displayAjaxCodeInfo($code_info = null) {

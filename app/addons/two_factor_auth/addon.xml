@@ -13,4 +13,6 @@
     </autoload>
     <bootstrap>\Tygh\Addons\TwoFactorAuth\Bootstrap</bootstrap>
     <installer>\Tygh\Addons\TwoFactorAuth\Installer</installer>
+
+    <email_templates type="file">resources/email_templates.xml</email_templates>
 </addon>

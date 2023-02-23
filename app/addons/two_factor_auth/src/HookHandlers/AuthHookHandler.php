@@ -33,8 +33,18 @@ class AuthHookHandler
     {
         $authorization_code = ServiceProvider::getAuthorizationCode();
         if (AREA === 'C') {
-            if (defined('AJAX_REQUEST') && !empty($_POST)) {
-                $authorization_code->displayAjaxCodeInfo();
+            if (defined('AJAX_REQUEST')) {
+                $view = Tygh::$app['view'];
+
+                $view->assign([
+                    'style'             => 'popup',
+                    'code_info'         => false,
+                    'id'                => $_REQUEST['login_block_id']
+                ]);
+
+                if ($view->templateExists('addons/two_factor_auth/views/auth/confirm_code.tpl')) {
+                    $view->display('addons/two_factor_auth/views/auth/confirm_code.tpl');
+                }
             }
             if (!isset(Tygh::$app['session']['tf_auth']['code_approved']) && !empty($auth) && !empty($_POST)) {
                 Tygh::$app['session']['tf_auth']['user_id'] = $user_id;

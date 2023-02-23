@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<email_templates scheme="1.0">
+    <templates>
+        <item>
+            <code><![CDATA[two_factor_auth_notification]]></code>
+            <area><![CDATA[C]]></area>
+            <status><![CDATA[A]]></status>
+            <subject/>
+            <default_subject><![CDATA[{{ company_name }}: {{ __("Ваш код для входа") }}]]></default_subject>
+            <template/>
+            <default_template>
+            <![CDATA[
+            {% set title %}
+            {% endset %}
+            {{ snippet("header", {"title": title }  ) }}
+
+            <p>
+                {{ __("Здравствуйте, ваш код для входа: ") }},
+                <b>{{ code }}</b><br />
+            </p>
+                </td>
+           </tr>
+           <tr>
+                <td width="600px" valign="top" align="center" >
+                 {{ snippet("footer") }}
+            ]]>
+            </default_template>
+            <params_schema/>
+            <params/>
+            <addon><![CDATA[two_factor_auth]]></addon>
+        </item>
+    </templates>
+</email_templates>
