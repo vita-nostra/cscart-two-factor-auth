@@ -29,7 +29,8 @@ if ($mode == 'repeat_confirm_code') {
             return [CONTROLLER_STATUS_REDIRECT, 'auth.confirm_code', true];
         }
     } else {
-        fn_set_notification('E', __('error'), __('Введите логин и пароль еще раз'));
+        fn_set_notification('W', __('warning'), __('two_factor_auth.notification.session_expired'));
         return [CONTROLLER_STATUS_REDIRECT, 'auth.login_form', true];
     }
 }
+

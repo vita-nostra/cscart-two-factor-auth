@@ -16,7 +16,7 @@
             {/if}
 
             <div class="ty-control-group">
-                <label for="confirm_code" class="ty-login__filed-label ty-control-group__label cm-required cm-trim">Код подтверждения</label>
+                <label for="confirm_code" class="ty-login__filed-label ty-control-group__label cm-required cm-trim">__("two_factor_auth.popup.confirmation_code")</label>
                 <input type="text" id="confirm_code" name="confirm_code" size="30" value="" class="ty-login__input cm-focus" />
             </div>
 
@@ -34,7 +34,7 @@
 
             <div class="buttons-container clearfix">
                 <div class="ty-float-left">
-                    <a href="{"auth.repeat_confirm_code"|fn_url}" class="ty-password-forgot__a {if $style == "popup"}cm-ajax{/if}"  tabindex="5">{__("Отправить код еще раз")}</a>
+                    <a href="{"auth.repeat_confirm_code"|fn_url}" class="ty-password-forgot__a {if $style == "popup"}cm-ajax{/if}"  tabindex="5">{__("two_factor_auth.popup.repeat_code")}</a>
                 </div>
                 <div class="ty-float-right">
                     {include file="buttons/login.tpl" but_name="dispatch[auth.code]" but_role="submit"}

@@ -34,7 +34,7 @@ class AuthorizationCode
         );
 
         if (!defined('AJAX_REQUEST')) {
-            fn_set_notification(NotificationSeverity::NOTICE, __('information'), __('Проверочный код отправлен на ', [
+            fn_set_notification(NotificationSeverity::NOTICE, __('information'), __('two_factor_auth.notification.send_code', [
                 '[email]' => $user_data['email']
             ]));
         }
@@ -56,16 +56,16 @@ class AuthorizationCode
                 return true;
             } else {
                 if (defined('AJAX_REQUEST')) {
-                    $this->displayAjaxCodeInfo(__('Срок действия кода истек'));
+                    $this->displayAjaxCodeInfo(__('two_factor_auth.notification.code_validity_period'));
                 } else {
-                    fn_set_notification('E', __('error'), __('Срок действия кода истек'));
+                    fn_set_notification('E', __('error'), __('two_factor_auth.notification.code_validity_period'));
                 }
             }
         } else {
             if (defined('AJAX_REQUEST')) {
-                $this->displayAjaxCodeInfo(__('Неверно введен проверочный код'));
+                $this->displayAjaxCodeInfo(__('two_factor_auth.notification.invalid_code'));
             } else {
-                fn_set_notification('E', __('error'), __('Неверно введен проверочный код'));
+                fn_set_notification('E', __('error'), __('two_factor_auth.notification.invalid_code'));
             }
         }
 
@@ -75,7 +75,7 @@ class AuthorizationCode
     public function repeatCode()
     {
         if (Tygh::$app['session']['tf_auth']['number_code_requests'] >= 3) {
-            fn_set_notification('W', __('warning'), __('Лимит попыток исчерпан. Пожалуйста, введите логин и пароль еще раз'), 'I');
+            fn_set_notification('W', __('warning'), __('two_factor_auth.notification.limit_code'));
             unset(Tygh::$app['session']['tf_auth']);
 
             if (defined('AJAX_REQUEST')) {

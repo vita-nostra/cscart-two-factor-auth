@@ -1,6 +1,6 @@
 {include file="common/letter_header.tpl"}
 
-{__("Ваш код")}:<br /><br />
+{__("email_template.two_factor_auth_login_code")}:<br /><br />
 
 <p> {$code} </p>
 

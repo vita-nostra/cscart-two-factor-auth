@@ -19,3 +19,43 @@ msgstr "Двухфакторная авторизация"
 msgctxt "Addons::description::two_factor_auth"
 msgid "Enables two-factor authorization"
 msgstr "Подключает двухфакторную авторизацию"
+
+msgctxt "Languages::profile.event.send_code"
+msgid "Profile event send code"
+msgstr "Отправка кода"
+
+msgctxt "Languages::email_template.two_factor_auth_notification"
+msgid "Two-factor authorization. Sending the code"
+msgstr "Двухфакторная авторизация. Отправка кода"
+
+msgctxt "Languages::email_template.two_factor_auth_login_code"
+msgid "Your login code"
+msgstr "Ваш код для входа"
+
+msgctxt "Languages::two_factor_auth.notification.send_code"
+msgid "The login code has been sent to the mail [email]"
+msgstr "Код для входа отправлен на почту [email]"
+
+msgctxt "Languages::two_factor_auth.notification.code_validity_period"
+msgid "The code has expired"
+msgstr "Срок действия кода истек"
+
+msgctxt "Languages::two_factor_auth.notification.invalid_code"
+msgid "The verification code was entered incorrectly"
+msgstr "Неверно введен проверочный код"
+
+msgctxt "Languages::two_factor_auth.notification.limit_code"
+msgid "The limit of attempts is exhausted. Please enter your username and password again"
+msgstr "Лимит попыток исчерпан. Пожалуйста, введите логин и пароль еще раз"
+
+msgctxt "Languages::two_factor_auth.notification.session_expired"
+msgid "Your session has expired. Please enter your username and password again"
+msgstr "Ваша сессия истекла. Пожалуйста введите логин и пароль еще раз"
+
+msgctxt "Languages::two_factor_auth.popup.confirmation_code"
+msgid "Confirmation code"
+msgstr "Код подтверждения"
+
+msgctxt "Languages::two_factor_auth.popup.repeat_code"
+msgid "Send the code again"
+msgstr "Отправить код еще раз"

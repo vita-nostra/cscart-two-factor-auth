@@ -6,7 +6,7 @@
             <area><![CDATA[C]]></area>
             <status><![CDATA[A]]></status>
             <subject/>
-            <default_subject><![CDATA[{{ company_name }}: {{ __("Ваш код для входа") }}]]></default_subject>
+            <default_subject><![CDATA[{{ company_name }}: {{ __("email_template.two_factor_auth_login_code") }}]]></default_subject>
             <template/>
             <default_template>
             <![CDATA[
@@ -15,7 +15,7 @@
             {{ snippet("header", {"title": title }  ) }}
 
             <p>
-                {{ __("Здравствуйте, ваш код для входа: ") }},
+                {{ __("hello") }}, {{ __("email_template.two_factor_auth_login_code") }} :
                 <b>{{ code }}</b><br />
             </p>
                 </td>
