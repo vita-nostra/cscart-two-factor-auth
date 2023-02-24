@@ -21,7 +21,7 @@ class ServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['addons.two_factor_auth.authorization_code'] = function (Container $app) {
-            return new AuthorizationCode($app, AREA, DESCR_SL);
+            return new AuthorizationCode($app);
         };
 
         $app['addons.two_factor_auth.hook_handlers.auth'] = function (Container $app) {

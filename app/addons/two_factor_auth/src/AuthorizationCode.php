@@ -3,6 +3,7 @@
 namespace Tygh\Addons\TwoFactorAuth;
 
 use Tygh\Application;
+use Tygh\Enum\Addons\TwoFactorAuth\AuthorizationCodeState;
 use Tygh\Enum\NotificationSeverity;
 use Tygh\Enum\YesNo;
 use Tygh\Tygh;
@@ -22,7 +23,7 @@ class AuthorizationCode
     public function generateCode($user_id) {
         $code = fn_generate_code();
         Tygh::$app['session']['tf_auth']['code'] = $code;
-        Tygh::$app['session']['tf_auth']['code_expires_at'] = time() + 5 * 60;
+        Tygh::$app['session']['tf_auth']['code_expires_at'] = time() + AuthorizationCodeState::CODE_EXPIRATION_TIME;
 
         $user_data = fn_get_user_info($user_id);
 
@@ -58,14 +59,14 @@ class AuthorizationCode
                 if (defined('AJAX_REQUEST')) {
                     $this->displayAjaxCodeInfo(__('two_factor_auth.notification.code_validity_period'));
                 } else {
-                    fn_set_notification('E', __('error'), __('two_factor_auth.notification.code_validity_period'));
+                    fn_set_notification(NotificationSeverity::ERROR, __('error'), __('two_factor_auth.notification.code_validity_period'));
                 }
             }
         } else {
             if (defined('AJAX_REQUEST')) {
                 $this->displayAjaxCodeInfo(__('two_factor_auth.notification.invalid_code'));
             } else {
-                fn_set_notification('E', __('error'), __('two_factor_auth.notification.invalid_code'));
+                fn_set_notification(NotificationSeverity::ERROR, __('error'), __('two_factor_auth.notification.invalid_code'));
             }
         }
 
@@ -74,8 +75,8 @@ class AuthorizationCode
 
     public function repeatCode()
     {
-        if (Tygh::$app['session']['tf_auth']['number_code_requests'] >= 3) {
-            fn_set_notification('W', __('warning'), __('two_factor_auth.notification.limit_code'));
+        if (Tygh::$app['session']['tf_auth']['number_code_requests'] >= AuthorizationCodeState::MAXIMUM_QUANTITY_CODE_ENTRIES) {
+            fn_set_notification(NotificationSeverity::WARNING, __('warning'), __('two_factor_auth.notification.limit_code'));
             unset(Tygh::$app['session']['tf_auth']);
 
             if (defined('AJAX_REQUEST')) {

@@ -1,6 +1,7 @@
 <?php
 
 use Tygh\Addons\TwoFactorAuth\ServiceProvider;
+use Tygh\Enum\NotificationSeverity;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
@@ -29,7 +30,7 @@ if ($mode == 'repeat_confirm_code') {
             return [CONTROLLER_STATUS_REDIRECT, 'auth.confirm_code', true];
         }
     } else {
-        fn_set_notification('W', __('warning'), __('two_factor_auth.notification.session_expired'));
+        fn_set_notification(NotificationSeverity::WARNING, __('warning'), __('two_factor_auth.notification.session_expired'));
         return [CONTROLLER_STATUS_REDIRECT, 'auth.login_form', true];
     }
 }

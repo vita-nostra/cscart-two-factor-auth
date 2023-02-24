@@ -4,6 +4,8 @@ namespace Tygh\Addons\TwoFactorAuth\HookHandlers;
 
 use Tygh\Addons\TwoFactorAuth\ServiceProvider;
 use Tygh\Application;
+use Tygh\Enum\Addons\TwoFactorAuth\AuthorizationCodeState;
+use Tygh\Enum\SiteArea;
 use Tygh\Tygh;
 
 /**
@@ -24,15 +26,14 @@ class AuthHookHandler
      * The "login_user_pre" hook handler.
      *
      * Actions performed:
-     *  - Replaces $object_id (the identifier of a product) with the identifier of its parent product, if available.
-     *      This displays the attachments of the parent product on the pages of its child variations.
+     *  - After successful authorization, an additional verification is added using a code that is sent to the email
      *
      * @see fn_login_user
      */
     public function onLoginUserPre(&$user_id, &$udata, &$auth, &$condition)
     {
         $authorization_code = ServiceProvider::getAuthorizationCode();
-        if (AREA === 'C') {
+        if (AREA === SiteArea::STOREFRONT) {
             if (defined('AJAX_REQUEST')) {
                 $view = Tygh::$app['view'];
 
@@ -48,7 +49,7 @@ class AuthHookHandler
             }
             if (!isset(Tygh::$app['session']['tf_auth']['code_approved']) && !empty($auth) && !empty($_POST)) {
                 Tygh::$app['session']['tf_auth']['user_id'] = $user_id;
-                Tygh::$app['session']['tf_auth']['number_code_requests'] = 0;
+                Tygh::$app['session']['tf_auth']['number_code_requests'] = AuthorizationCodeState::STARTING_QUANTITY_CODE_ENTRIES;
                 $authorization_code->generateCode($user_id);
 
                 fn_redirect('auth.confirm_code');
