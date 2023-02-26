@@ -1,0 +1,53 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US"
+
+msgctxt "Addons::name::two_factor_auth"
+msgid "Two-factor authorization"
+msgstr "Two-factor authorization"
+
+msgctxt "Addons::description::two_factor_auth"
+msgid "Enables two-factor authorization"
+msgstr "Enables two-factor authorization"
+
+msgctxt "Languages::profile.event.send_code"
+msgid "Profile event send code"
+msgstr "Profile event send code"
+
+msgctxt "Languages::email_template.two_factor_auth_notification"
+msgid "Two-factor authorization. Sending the code"
+msgstr "Two-factor authorization. Sending the code"
+
+msgctxt "Languages::email_template.two_factor_auth_login_code"
+msgid "Your login code"
+msgstr "Your login code"
+
+msgctxt "Languages::two_factor_auth.notification.send_code"
+msgid "The login code has been sent to the mail [email]"
+msgstr "The login code has been sent to the mail [email]"
+
+msgctxt "Languages::two_factor_auth.notification.code_validity_period"
+msgid "The code has expired"
+msgstr "The code has expired"
+
+msgctxt "Languages::two_factor_auth.notification.invalid_code"
+msgid "The verification code was entered incorrectly"
+msgstr "The verification code was entered incorrectly"
+
+msgctxt "Languages::two_factor_auth.notification.limit_code"
+msgid "The limit of attempts is exhausted. Please enter your username and password again"
+msgstr "The limit of attempts is exhausted. Please enter your username and password again"
+
+msgctxt "Languages::two_factor_auth.notification.session_expired"
+msgid "Your session has expired. Please enter your username and password again"
+msgstr "Your session has expired. Please enter your username and password again"
+
+msgctxt "Languages::two_factor_auth.popup.confirmation_code"
+msgid "Confirmation code"
+msgstr "Confirmation code"
+
+msgctxt "Languages::two_factor_auth.popup.repeat_code"
+msgid "Send the code again"
+msgstr "Send the code again"
